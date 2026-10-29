@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Task10</title> 
+</head>
+<body>
+<label  for="name">Name:</label>
+<input type="text" id="name" placeholder="Name">
+<button id="submit">Submit</button>
+<script>
+const nameInput = document.getElementById("name");
+const button = document.getElementById("submit");
+button.addEventListener("click", submitForm);
+function submitForm() {
+    const name = nameInput.value;
+    if (name) {
+        fetch("https://api.agify.io?name=" + name)
+            .then(response => response.json())
+            .then(data => {
+                const { name, age } = data;
+                alert(`Your name is: ${name}\nYour age is: ${age}`);
+            })
+            .catch(error => alert('Error: ' + error.message));
+    } else {
+        alert("Please enter a name.");
+    }
+}
+</script>
+</body>
+</html>
